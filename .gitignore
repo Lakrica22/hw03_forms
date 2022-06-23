@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+
 *.py[cod]
 *$py.class
 
@@ -19,7 +19,7 @@ lib64/
 parts/
 sdist/
 var/
-.vscode/
+
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
