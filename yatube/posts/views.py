@@ -11,7 +11,7 @@ POSTS_ON_LIST: int = 10
 def index(request):
     posts = Post.objects.all().order_by('-pub_date')
     page_obj = paginator_view(request, posts)
-    context = {'page_obj': page_obj,}
+    context = {'page_obj': page_obj, }
     return render(request, 'posts/index.html', context)
 
 
