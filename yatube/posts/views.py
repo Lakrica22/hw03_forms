@@ -3,39 +3,38 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Post, Group, User
 from .forms import PostForm
-from .utils import get_page_context
+from .utils import paginator_view
 
 POSTS_ON_LIST: int = 10
 
 
 def index(request):
-    context = get_page_context(Post.objects.all().order_by('-pub_date'),
-                               request
-                               )
+    posts = Post.objects.all().order_by('-pub_date')
+    context = paginator_view(request, posts)
     return render(request, 'posts/index.html', context)
 
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = group.posts.all()[:POSTS_ON_LIST]
+    posts = group.posts.select_related("author", "group")
+    page_obj = paginator_view(request, posts)
     context = {
         'group': group,
         'posts': posts,
+        'page_obj': page_obj,
     }
-    context.update(get_page_context(Post.objects.all().order_by('-pub_date'),
-                   request)
-                   )
     return render(request, 'posts/group_list.html', context)
 
 
 def profile(request, username):
     author = get_object_or_404(User, username=username)
+    posts = Post.objects.all().filter(author=author)
+    page_obj = paginator_view(request, posts)
     context = {
         'author': author,
+        'posts': posts,
+        'page_obj': page_obj
     }
-    context.update(get_page_context(Post.objects.all().filter(author=author),
-                   request)
-                   )
     return render(request, 'posts/profile.html', context)
 
 
