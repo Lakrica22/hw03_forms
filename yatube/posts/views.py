@@ -10,13 +10,14 @@ POSTS_ON_LIST: int = 10
 
 def index(request):
     posts = Post.objects.all().order_by('-pub_date')
-    context = paginator_view(request, posts)
+    page_obj = paginator_view(request, posts)
+    context = {'page_obj': page_obj,}
     return render(request, 'posts/index.html', context)
 
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = group.posts.select_related("author", "group")
+    posts = group.posts.select_related()
     page_obj = paginator_view(request, posts)
     context = {
         'group': group,
@@ -27,8 +28,8 @@ def group_posts(request, slug):
 
 
 def profile(request, username):
-    author = get_object_or_404(User, username=username)
-    posts = Post.objects.all().filter(author=author)
+    author = User.objects.get(username=username)
+    posts = Post.objects.filter(author=author)
     page_obj = paginator_view(request, posts)
     context = {
         'author': author,
