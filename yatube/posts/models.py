@@ -19,7 +19,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='authors')
+        related_name='posts')
     group = models.ForeignKey(
         Group,
         blank=True,
