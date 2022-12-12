@@ -1,3 +1,19 @@
-# backend_community_homework
+# **Социальная сеть Yatube для блогеров**
+Промежуточная работа.
 
-[![CI](https://github.com/yandex-praktikum/hw03_forms/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw03_forms/actions/workflows/python-app.yml)
+Настроен эмулятор отправки писем.
+Настроена отправка письма при восстановлении пароля.
+Создано и подключено приложение core. В нем размещён и зарегистрирован фильтр addclass, позволяющий добавлять CSS-класс к тегу шаблона. Создан и зарегистрирован контекст-процессор, добавляющий текущий год на все страницы в переменную {{ year }}.
+Создано и подключено приложение about, в нём созданы статические страницы /about/author/ и /about/tech/.
+Подключено приложение django.contrib.auth, его urls.py подключен к головному urls.py.
+Создано и подключено приложение users.
+Создана страница пользователя profile/<username>/.
+Создана отдельная страница поста posts/<post_id>/. 
+Подключен паджинатор.
+Добавлены страницы для публикации и редактирования постов.
+
+# **Как запустить проект:**
+
+Клонировать репозиторий:
+```
+git clone git@github.com:Lakrica22/hw03_forms.git
